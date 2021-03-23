@@ -4,6 +4,7 @@ Use U-Boot
 .. toctree::
    :maxdepth: 1
 
+   dfu
    fdt_overlays
    netconsole
    partitions
@@ -14,6 +15,7 @@ Shell commands
 .. toctree::
    :maxdepth: 1
 
+   addrmap
    base
    bootefi
    booti

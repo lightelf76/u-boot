@@ -276,6 +276,19 @@ config SPL_SEPARATE_BSS
 	  location is used. Normally we put the device tree at the end of BSS
 	  but with this option enabled, it goes at _image_binary_end.
 
+config SPL_READ_ONLY
+	bool
+	depends on SPL_OF_PLATDATA
+	# Bind cannot be supported because the udevice structs are in read-only
+	# memory so we cannot update the linked lists.
+	select SPL_OF_PLATDATA_NO_BIND
+	select SPL_OF_PLATDATA_RT
+	help
+	  Some platforms (e.g. x86 Apollo Lake) load SPL into a read-only
+	  section of memory. This means that of-platdata must make a copy (in
+	  writeable memory) of anything it wants to modify, such as
+	  device-private data.
+
 config SPL_BANNER_PRINT
 	bool "Enable output of the SPL banner 'U-Boot SPL ...'"
 	default y
@@ -317,7 +330,8 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
 		     ARCH_MX6 || ARCH_MX7 || \
 		     ARCH_ROCKCHIP || ARCH_MVEBU ||  ARCH_SOCFPGA || \
 		     ARCH_AT91 || ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
-		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || TARGET_SIFIVE_FU540
+		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || \
+		     TARGET_SIFIVE_UNLEASHED
 	help
 	  Use sector number for specifying U-Boot location on MMC/SD in
 	  raw mode.
@@ -334,7 +348,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
 	default 0x300 if ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || OMAP44XX || \
 		         OMAP54XX || AM33XX || AM43XX || ARCH_K3
 	default 0x4000 if ARCH_ROCKCHIP
-	default 0x822 if TARGET_SIFIVE_FU540
+	default 0x822 if TARGET_SIFIVE_UNLEASHED
 	help
 	  Address on the MMC to load U-Boot from, when the MMC is being used
 	  in raw mode. Units: MMC sectors (1 sector = 512 bytes).
@@ -487,7 +501,7 @@ config SPL_CACHE_SUPPORT
 	  future requests for that data can be served faster. Enable this option
 	  to build the drivers in drivers/cache as part of an SPL build.
 
-config SPL_CPU_SUPPORT
+config SPL_CPU
 	bool "Support CPU drivers"
 	help
 	  Enable this to support CPU drivers in SPL. These drivers can set
@@ -1439,6 +1453,17 @@ config TPL_STACK
 	help
 	  The address of the initial stack-pointer for the TPL stage.
 	  Usually this will be the (aligned) top-of-stack.
+
+config TPL_READ_ONLY
+	bool
+	depends on TPL_OF_PLATDATA
+	select TPL_OF_PLATDATA_NO_BIND
+	select TPL_OF_PLATDATA_RT
+	help
+	  Some platforms (e.g. x86 Apollo Lake) load SPL into a read-only
+	  section of memory. This means that of-platdata must make a copy (in
+	  writeable memory) of anything it wants to modify, such as
+	  device-private data.
 
 config TPL_BOOTROM_SUPPORT
         bool "Support returning to the BOOTROM (from TPL)"

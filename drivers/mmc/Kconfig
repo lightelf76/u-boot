@@ -311,6 +311,7 @@ config MMC_MXS
 
 config MMC_PCI
 	bool "Support for MMC controllers on PCI"
+	depends on MMC_SDHCI
 	help
 	  This selects PCI-based MMC controllers.
 	  If you have an MMC controller on a PCI bus, say Y here.
@@ -323,6 +324,15 @@ config MMC_OCTEONTX
 	  This selects the OcteonTX Multimedia card Interface.
 	  If you have an OcteonTX/TX2 board with a Multimedia Card slot,
 	  say Y here.
+
+	  If unsure, say N.
+
+config MVEBU_MMC
+	bool "Kirkwood MMC controller support"
+	depends on DM_MMC && BLK && ARCH_KIRKWOOD
+	help
+	  Support for MMC host controller on Kirkwood SoCs.
+	  If you are on a Kirkwood architecture, say Y here.
 
 	  If unsure, say N.
 
@@ -811,4 +821,10 @@ config SYS_FSL_ERRATUM_ESDHC135
 	bool
 
 config SYS_FSL_ERRATUM_ESDHC_A001
+	bool
+
+config SYS_FSL_ERRATUM_A011334
+	bool
+
+config SYS_FSL_ESDHC_UNRELIABLE_PULSE_DETECTION_WORKAROUND
 	bool

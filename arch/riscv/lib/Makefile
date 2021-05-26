@@ -11,7 +11,7 @@ obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
 obj-$(CONFIG_CMD_GO) += boot.o
 obj-y	+= cache.o
 ifeq ($(CONFIG_$(SPL_)RISCV_MMODE),y)
-obj-$(CONFIG_SIFIVE_CLINT) += sifive_clint.o
+obj-$(CONFIG_$(SPL_)SIFIVE_CLINT) += sifive_clint.o
 obj-$(CONFIG_ANDES_PLIC) += andes_plic.o
 else
 obj-$(CONFIG_SBI) += sbi.o
@@ -27,6 +27,7 @@ obj-$(CONFIG_SPL_BUILD)	+= spl.o
 obj-y   += fdt_fixup.o
 
 # For building EFI apps
+CFLAGS_NON_EFI := -fstack-protector-strong
 CFLAGS_$(EFI_CRT0) := $(CFLAGS_EFI)
 CFLAGS_REMOVE_$(EFI_CRT0) := $(CFLAGS_NON_EFI)
 

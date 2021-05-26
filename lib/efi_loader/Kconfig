@@ -173,6 +173,9 @@ config EFI_CAPSULE_AUTHENTICATE
 	select X509_CERTIFICATE_PARSER
 	select PKCS7_MESSAGE_PARSER
 	select PKCS7_VERIFY
+	select IMAGE_SIGN_INFO
+	select HASH_CALCULATE
+	select EFI_SIGNATURE_SUPPORT
 	default n
 	help
 	  Select this option if you want to enable capsule
@@ -299,7 +302,13 @@ config EFI_RNG_PROTOCOL
 
 config EFI_TCG2_PROTOCOL
 	bool "EFI_TCG2_PROTOCOL support"
+	default y
 	depends on TPM_V2
+	select SHA1
+	select SHA256
+	select SHA512_ALGO
+	select SHA384
+	select SHA512
 	help
 	  Provide a EFI_TCG2_PROTOCOL implementation using the TPM hardware
 	  of the platform.
@@ -335,12 +344,17 @@ config EFI_SECURE_BOOT
 	select X509_CERTIFICATE_PARSER
 	select PKCS7_MESSAGE_PARSER
 	select PKCS7_VERIFY
+	select HASH_CALCULATE
+	select EFI_SIGNATURE_SUPPORT
 	default n
 	help
 	  Select this option to enable EFI secure boot support.
 	  Once SecureBoot mode is enforced, any EFI binary can run only if
 	  it is signed with a trusted key. To do that, you need to install,
 	  at least, PK, KEK and db.
+
+config EFI_SIGNATURE_SUPPORT
+	bool
 
 config EFI_ESRT
 	bool "Enable the UEFI ESRT generation"

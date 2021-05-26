@@ -88,7 +88,7 @@ SIT format
 SIT is a 20 byte long structure containing of 5 32-bit words. Those encode
 bootloader B-copy area offset (called "firstSectorNumber"), magic value
 (called "tag") that is always 0x00112233, and three unused words set to 0.
-SIT is documented in [1] and [2]. Example SIT are below::
+SIT is documented in [1]_ and [2]_. Example SIT are below::
 
   $ hexdump -vC sit-mx7d.bin
     00000000  00 00 00 00
@@ -150,7 +150,7 @@ Examples of writing SIT and two copies of bootloader to SD or eMMC:
     => mmc write ${loadaddr} 0x41 0x1
 
     => dhcp ${loadaddr} flash.bin
-    => setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt
+    => setexpr blkcnt ${filesize} + 0x1ff && setexpr blkcnt ${blkcnt} / 0x200
     => mmc dev 1
     => mmc write ${loadaddr} 0x42   ${blkcnt}
     => mmc write ${loadaddr} 0x1042 ${blkcnt}

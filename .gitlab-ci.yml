@@ -151,7 +151,7 @@ Run binman, buildman, dtoc, Kconfig and patman testsuites:
       export USER=gitlab;
       virtualenv -p /usr/bin/python3 /tmp/venv;
       . /tmp/venv/bin/activate;
-      pip install pyelftools pytest pygit2;
+      pip install -r test/py/requirements.txt;
       export UBOOT_TRAVIS_BUILD_DIR=/tmp/sandbox_spl;
       export PYTHONPATH="${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc/pylibfdt";
       export PATH="${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}";
@@ -206,18 +206,6 @@ sandbox_flattree test.py:
     TEST_PY_BD: "sandbox_flattree"
   <<: *buildman_and_testpy_dfn
 
-vexpress_ca15_tc2 test.py:
-  variables:
-    TEST_PY_BD: "vexpress_ca15_tc2"
-    TEST_PY_ID: "--id qemu"
-  <<: *buildman_and_testpy_dfn
-
-vexpress_ca9x4 test.py:
-  variables:
-    TEST_PY_BD: "vexpress_ca9x4"
-    TEST_PY_ID: "--id qemu"
-  <<: *buildman_and_testpy_dfn
-
 integratorcp_cm926ejs test.py:
   variables:
     TEST_PY_BD: "integratorcp_cm926ejs"
@@ -234,30 +222,6 @@ qemu_arm test.py:
 qemu_arm64 test.py:
   variables:
     TEST_PY_BD: "qemu_arm64"
-    TEST_PY_TEST_SPEC: "not sleep"
-  <<: *buildman_and_testpy_dfn
-
-qemu_mips test.py:
-  variables:
-    TEST_PY_BD: "qemu_mips"
-    TEST_PY_TEST_SPEC: "not sleep"
-  <<: *buildman_and_testpy_dfn
-
-qemu_mipsel test.py:
-  variables:
-    TEST_PY_BD: "qemu_mipsel"
-    TEST_PY_TEST_SPEC: "not sleep"
-  <<: *buildman_and_testpy_dfn
-
-qemu_mips64 test.py:
-  variables:
-    TEST_PY_BD: "qemu_mips64"
-    TEST_PY_TEST_SPEC: "not sleep"
-  <<: *buildman_and_testpy_dfn
-
-qemu_mips64el test.py:
-  variables:
-    TEST_PY_BD: "qemu_mips64el"
     TEST_PY_TEST_SPEC: "not sleep"
   <<: *buildman_and_testpy_dfn
 

@@ -175,6 +175,12 @@
 			};
 
 			/omit-if-no-ref/
+			uart1_pe_pins: uart1-pe-pins {
+				pins = "PE10", "PE11";
+				function = "uart1";
+			};
+
+			/omit-if-no-ref/
 			uart1_pg6_pins: uart1-pg6-pins {
 				pins = "PG6", "PG7";
 				function = "uart1";

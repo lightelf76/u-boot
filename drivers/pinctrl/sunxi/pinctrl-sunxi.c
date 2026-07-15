@@ -603,7 +603,11 @@ static const struct sunxi_pinctrl_function sun20i_d1_pinctrl_functions[] = {
 	{ "gpio_in",	0 },
 	{ "gpio_out",	1 },
 	{ "i2c0",	4 },	/* PB10-PB11 */
+#if IS_ENABLED(CONFIG_I2C3_PORT_B)
+	{ "i2c3",	4 },	/* PB6-PB7 */
+#else
 	{ "i2c3",	3 },	/* PG10-PG11 */
+#endif
 	{ "mmc0",	2 },	/* PF0-PF5 */
 	{ "mmc1",	2 },	/* PG0-PG5 */
 	{ "mmc2",	3 },	/* PC2-PC7 */
@@ -613,7 +617,11 @@ static const struct sunxi_pinctrl_function sun20i_d1_pinctrl_functions[] = {
 #else
 	{ "uart0",	6 },	/* PB0-PB1, PB8-PB9, PE2-PE3 */
 #endif
+#if IS_ENABLED(CONFIG_UART1_PORT_E)
+	{ "uart1",	3 },	/* PE10-PE11 */
+#else
 	{ "uart1",	2 },	/* PG6-PG7 */
+#endif
 	{ "uart2",	7 },	/* PB0-PB1 */
 	{ "uart3",	7 },	/* PB6-PB7 */
 };

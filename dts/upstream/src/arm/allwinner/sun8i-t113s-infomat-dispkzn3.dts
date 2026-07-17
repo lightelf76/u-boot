@@ -44,6 +44,27 @@
 		vin-supply = <&reg_vcc5v>;
 	};
 
+	reg_usb0_vbus: usb0-vbus {
+		compatible = "regulator-fixed";
+		regulator-name = "usb0-vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		enable-active-high;
+		gpio = <&pio 1 9 GPIO_ACTIVE_HIGH>;
+		status = "disabled";
+	};
+
+	reg_usb1_vbus: usb1-vbus {
+		compatible = "regulator-fixed";
+		regulator-name = "usb1-vbus";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-boot-on;
+		enable-active-high;
+		gpio = <&pio 7 6 GPIO_ACTIVE_HIGH>;
+		status = "disabled";
+	};
+
 };
 
 &dcxo {
@@ -63,7 +84,7 @@
 	pinctrl-names = "default";
 	phy-handle = <&ext_rmii_phy>;
 	phy-mode = "rmii";
-	phy-supply = <&reg_vcc_3v3>;
+	phy-supply = <&reg_3v3>;
 	status = "okay";
 };
 
@@ -98,7 +119,6 @@
 	status = "okay";
 };
 
-/* The USB-C socket has its CC pins pulled to GND, so is hardwired as a UFP. */
 &usb_otg {
 	dr_mode = "host";
 	status = "okay";

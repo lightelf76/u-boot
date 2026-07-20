@@ -91,6 +91,12 @@
 			};
 
 			/omit-if-no-ref/
+			i2c3_pb_pins: i2c3-pb-pins {
+				pins = "PB6", "PB7";
+				function = "i2c3";
+			};
+
+			/omit-if-no-ref/
 			i2s1_pins: i2s1-pins {
 				pins = "PG12", "PG13";
 				function = "i2s1";

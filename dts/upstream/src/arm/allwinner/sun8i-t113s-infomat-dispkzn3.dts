@@ -79,7 +79,30 @@
 	status = "okay";
 };
 
+&i2c3 {
+	pinctrl-0 = <&i2c3_pb_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	eeprom0: eeprom@50 {
+		compatible = "atmel,24c02";		/* actually it's a 24AA02E48 */
+		reg = <0x50>;
+		pagesize = <16>;
+		read-only;
+		vcc-supply = <&reg_vcc3v3>;
+
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		eth0_macaddress: macaddress@fa {
+			reg = <0xfa 0x06>;
+		};
+	};
+};
+
 &emac {
+	nvmem-cells = <&eth0_macaddress>;
+	nvmem-cell-names = "mac-address";
 	pinctrl-0 = <&rmii_pe_pins>;
 	pinctrl-names = "default";
 	phy-handle = <&ext_rmii_phy>;

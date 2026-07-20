@@ -27,7 +27,7 @@
 	};
 
 	/* SY8088 DC/DC regulator on the board */
-	reg_3v3: regulator-3v3 {
+	reg_vcc3v3: regulator-3v3 {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc-3v3";
 		regulator-min-microvolt = <3300000>;
@@ -107,7 +107,7 @@
 	pinctrl-names = "default";
 	phy-handle = <&ext_rmii_phy>;
 	phy-mode = "rmii";
-	phy-supply = <&reg_3v3>;
+	phy-supply = <&reg_vcc3v3>;
 	status = "okay";
 };
 
@@ -121,7 +121,7 @@
 &mmc0 {
 	pinctrl-0 = <&mmc0_pins>;
 	pinctrl-names = "default";
-	vmmc-supply = <&reg_3v3>;
+	vmmc-supply = <&reg_vcc3v3>;
 	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>;/* PF6 */
 	disable-wp;
 	bus-width = <4>;
@@ -129,11 +129,11 @@
 };
 
 &pio {
-	vcc-pb-supply = <&reg_3v3>;
-	vcc-pd-supply = <&reg_3v3>;
-	vcc-pe-supply = <&reg_3v3>;
-	vcc-pf-supply = <&reg_3v3>;
-	vcc-pg-supply = <&reg_3v3>;
+	vcc-pb-supply = <&reg_vcc3v3>;
+	vcc-pd-supply = <&reg_vcc3v3>;
+	vcc-pe-supply = <&reg_vcc3v3>;
+	vcc-pf-supply = <&reg_vcc3v3>;
+	vcc-pg-supply = <&reg_vcc3v3>;
 };
 
 &uart1 {

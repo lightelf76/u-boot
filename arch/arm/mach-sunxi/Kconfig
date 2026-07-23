@@ -899,6 +899,13 @@ config UART0_PORT_F
 	at the same time, the system can be only booted in the FEL mode.
 	Only enable this if you really know what you are doing.
 
+config UART1_PORT_E
+	bool "UART1 on PE10,PE11"
+	depends on MACH_SUN8I_R528
+	---help---
+	Use pins PE10, PE11 for UART1 serial console.
+	Only enable this if you really know what you are doing.
+
 config OLD_SUNXI_KERNEL_COMPAT
 	bool "Enable workarounds for booting old kernels"
 	---help---
